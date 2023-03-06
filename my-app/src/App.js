@@ -15,6 +15,7 @@ import Menu from "./Panels/Menu";
 import 'react-notifications/lib/notifications.css';
 
 export default function App() {
+  const [user, setUser]  = useState ();
   const [data, setData]  = useState ();
   const history = createBrowserHistory();   
 
@@ -26,8 +27,13 @@ export default function App() {
         NotificationManager.error('Error', 'you are offline')
       }
 
-      console.clear ();
-  
+      fetchData('/user', 'post')
+      .then (userData =>  { 
+        console.log ("user: 123")
+        console.log (userData);
+        setUser (userData) 
+      }).catch (err => setUser (err));
+
       fetchData(history.location.pathname)
       .then (info =>  { 
         console.log (info);
@@ -43,7 +49,7 @@ export default function App() {
     return (
         <div className="root">
         <NotificationContainer/>
-        <Menu>
+        <Menu user={user}>
         </Menu>
 
         <Router history={history}>

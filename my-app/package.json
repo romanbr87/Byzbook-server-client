@@ -35,7 +35,7 @@
     "@babel/plugin-transform-react-jsx": "^7.21.0",
     "@babel/preset-react": "^7.18.6",
     "babel-plugin-react-ssr": "^1.0.1",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.21"
   },
   "browserslist": {
     "production": [

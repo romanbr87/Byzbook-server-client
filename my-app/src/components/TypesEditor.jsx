@@ -21,7 +21,6 @@ export default function TypesEditor(props) {
 
         <title>"אינדקס עסקים"</title>
         </Helmet>
-        <Menu user={props.user}/>
 
         <div className="container">
             <div className="typeEditor">

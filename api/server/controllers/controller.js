@@ -14,7 +14,6 @@ const db = require ('../../db.js');
       let val = { };
       val.businesses = await business.find (query);
       val.types = await types.find ({});
-      val.user = req.user;
       return callback (val, res);
     }
     catch (err) {

@@ -4,7 +4,7 @@ import "../styles/style.css";
 
 export default function Menu(props) {
     
-    const [user, setUser]  = useState ();
+    const [user, setUser]  = useState (props.user);
     const [userPaneldb, setUserPaneldb] = useState ()
     //const userPaneldb = useMemo(() => props.cnt, [props]);
     
@@ -25,21 +25,13 @@ export default function Menu(props) {
 
     }*/
 
-    useEffect(() => {
-        fetchData('/user', 'post')
-        .then (userData =>  { 
-          console.log ("user: ")
-          console.log (user);
-          setUser (userData) 
-        }).catch (err => setUser (err));
-  
+    useEffect(() => {  
         fetchData('/cnt', 'post')
         .then (userData =>  { 
             console.log ("userData:")
             console.log (userData)
             setUserPaneldb (userData) 
         }).catch (err => setUserPaneldb (err));
-          console.log (userPaneldb);
 
     }, [])
 
