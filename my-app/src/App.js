@@ -17,6 +17,7 @@ import 'react-notifications/lib/notifications.css';
 export default function App() {
   const [user, setUser]  = useState ();
   const [data, setData]  = useState ();
+  const [userPaneldb, setUserPaneldb] = useState ()
   const history = createBrowserHistory();   
 
     useEffect(() => {
@@ -40,6 +41,12 @@ export default function App() {
         setData (info)
       }).catch (err => setData (err));
       
+      fetchData('/cnt', 'post')
+      .then (userData =>  { 
+          console.log ("userData:")
+          console.log (userData)
+          setUserPaneldb (userData) 
+      }).catch (err => setUserPaneldb (err));
 
       window.addEventListener('offline', (e) => { notify ('offline') });
       window.addEventListener('online', (e) => { notify ('online') });
@@ -49,7 +56,7 @@ export default function App() {
     return (
         <div className="root">
         <NotificationContainer/>
-        <Menu user={user}>
+        <Menu user={user} userPaneldb={userPaneldb}>
         </Menu>
 
         <Router history={history}>

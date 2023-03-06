@@ -1,12 +1,11 @@
-import React, { useMemo, useEffect, useState } from "react";
+import React, { useMemo, } from "react";
 import { fetchData } from "../ContextAPI";
 import "../styles/style.css";
 
 export default function Menu(props) {
     
-    const [user, setUser]  = useState (props.user);
-    const [userPaneldb, setUserPaneldb] = useState ()
-    //const userPaneldb = useMemo(() => props.cnt, [props]);
+    const user  = useMemo (() => props.user, [props]);
+    const userPaneldb = useMemo(() => props.userPaneldb, [props]);
     
 
     /*const logout = () => {
@@ -24,16 +23,6 @@ export default function Menu(props) {
         })
 
     }*/
-
-    useEffect(() => {  
-        fetchData('/cnt', 'post')
-        .then (userData =>  { 
-            console.log ("userData:")
-            console.log (userData)
-            setUserPaneldb (userData) 
-        }).catch (err => setUserPaneldb (err));
-
-    }, [])
 
     return ( 
         <>
