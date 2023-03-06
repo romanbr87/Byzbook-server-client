@@ -24,7 +24,6 @@ export default function Reports(props) {
 
         <title>דיווחים על עסקים</title>
         </Helmet>
-        <Menu user={props.user}/>        
         <div className="container" style={{ textAlign: 'right', direction: 'rtl' }}>       
             <div className="jumbotron" style={{ padding: '0', borderRadius: '0' }}>
                 <h2 className="title" id="title" style={{ textAlign: 'center', textDecoration: 'underline' }}>
