@@ -1,13 +1,10 @@
-import React, { useMemo, } from "react";
-import { useSelector } from "react-redux";
+import React, { useMemo } from "react";
 import "../styles/style.css";
 
 export default function Menu(props) {
     
-    //const user  = useMemo (() => props.user, [props]);
-    const user = useSelector (state => state.user)
-    const panelData = useMemo(() => props.panelData, [props]);
-    
+    const user  = useMemo (() => props.user, [props]);
+    const panelData = useMemo (() => props.panelData, [props] )
 
     /*const logout = () => {
         const requestOptions = {
@@ -45,7 +42,7 @@ export default function Menu(props) {
         <li><a href="/about">אודות</a></li>
         <li><a href="/Contact">ייצרת קשר</a></li>        
         {props.children}
-        { (user.role) ?
+        { (user.role === 'admin') ?
         <li className="dropdown">
         <a href="/" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
         כלי ניהול<span className="caret"></span></a>

@@ -4,7 +4,7 @@ import panelData from './slices/panelData-slice';
 
 export const store = configureStore({
     reducer: {
-      user,  panelData
+      user, panelData
     }
   })
   

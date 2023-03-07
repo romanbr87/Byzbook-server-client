@@ -1,0 +1,1 @@
+set "fetch_string=qaz12qaz" && npm start

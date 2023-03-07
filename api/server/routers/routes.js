@@ -68,7 +68,7 @@ passport.use('local-login', new LocalStrategy(
 
 }))
 
-router.use(function (req, res, next) { 
+/*router.use(function (req, res, next) { 
   console.log (req.body)
   if (!req.user) 
   passport.authenticate('local-login', function(err, user, info) {
@@ -80,7 +80,7 @@ router.use(function (req, res, next) {
     });
   })(req, res, next);
   else next();
-})
+})*/
 
 router.get('/login', function(req, res, next) {
   console.log ("user: ", req.user);
@@ -146,31 +146,31 @@ router.post('/logout', ensureAuthenticatedLogout, function(req, res, next) {
   });
 })
 
-router.post('/user', function(req, res, next) {
-    res.json (req.user);
-})
-
-
 function ensureAuthenticatedPage(req, res, next) { 
   if (req.isAuthenticated()) { return next(); }
-  else  next ({ status: 404, message: "הדף לא קיים"});
+  else  next ({ status: 511, message: "הדף לא קיים"});
 }
 function ensureAuthenticatedReq(req, res, next) { 
-  if (req.isAuthenticated()) { return next(); }
-  else res.status(404).json({message: "אי אפשר לתת נתונים"});
+  console.log (`AUTH: ${req.isAuthenticated()}`)
+  if (!req.isAuthenticated()) res.status(511).json({message: "אי אפשר לתת נתונים"})
+  else { return next(); }
 }
 
 function ensureAuthenticatedLogin (req, res, next) { 
-  if (req.isAuthenticated()) next ({ status: 404, message: "הדף לא קיים"}); 
+  if (req.isAuthenticated()) next ({ status: 511, message: "הדף לא קיים"}); 
   else  return next();  
 }
 
 function ensureAuthenticatedLogout (req, res, next) { 
-  if (!req.isAuthenticated()) next ({ status: 404, message: "הדף לא קיים"}); 
+  if (!req.isAuthenticated()) next ({ status: 511, message: "הדף לא קיים"}); 
   else  return next();  
 }
 
 /*-------------------------------------------------------*/
+
+router.post('/user', ensureAuthenticatedReq, function(req, res, next) {
+  res.json (req.user);
+})
 
 router.post('/cnt', ensureAuthenticatedReq, function(req, res, next) {
   getCnt()

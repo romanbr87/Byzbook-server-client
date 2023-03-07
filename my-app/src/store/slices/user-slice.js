@@ -9,20 +9,7 @@ export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
 const userSlice = createSlice({
   name: 'user',
   initialState: {username: '', role: '', status: ''},
-  reducers: {
-    /*todoAdded(state, action) {
-      state.push({
-        id: action.payload.id,
-        text: action.payload.text,
-        completed: false
-      })
-    },
-    todoToggled(state, action) {
-      const todo = state.find(todo => todo.id === action.payload)
-      todo.completed = !todo.completed
-    }*/
-
-  },
+  reducers: {},
   extraReducers: builder => { 
     builder.addCase (fetchUser.pending, (state) => {
         state.status = 'loading';
@@ -37,12 +24,17 @@ const userSlice = createSlice({
     })
   
     builder.addCase (fetchUser.fulfilled, (state, action) => {
+        console.log (action);
         state.status = 'ready';
         state.username = action.payload;
         state.role = 'admin';
     })
 
-    }
+  }
 });
+
+const getSelectedData = selector => (dispatch, getState) => {
+  return selector(getState())
+}
 
 export default userSlice.reducer;

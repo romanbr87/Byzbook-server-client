@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Router, Switch, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchData } from './ContextAPI';
 
@@ -24,13 +24,19 @@ import { fetchUser } from './store/slices/user-slice';
 import { fetchPanelData } from './store/slices/panelData-slice';
 
 export default function App() {
-  const [user, setUser]  = useState ();
+  const user = useSelector (state => state.user)
+  const panelData = useSelector (state => state.panelData.data);  
+  const dispatch = useDispatch ()
+
+  
   const [data, setData]  = useState (null);
-  const [panelData, setPanelData] = useState ()
+  //const [panelData, setPanelData] = useState ()
   const history = createBrowserHistory();   
 
-    /*useEffect(() => {
-      
+    useEffect(() => {
+      dispatch (fetchPanelData());
+      dispatch(fetchUser());
+  
       console.clear ();
 
       const notify = (type) => {
@@ -46,21 +52,6 @@ export default function App() {
       console.log ("URL: "); 
       console.log (history.location)
 
-      fetchData('/user', 'post')
-      .then (userData =>  { 
-        console.log ("user: ")
-        console.log (userData);
-        setUser (userData) 
-      }).catch (err => setUser (err));
-      
-      fetchData('/cnt', 'post')
-      .then (cntCollections =>  { 
-          console.log ("cnt:")
-          console.log (cntCollections)
-          setUserPaneldb (cntCollections) 
-      }).catch (err => setUserPaneldb (err));
-
-
       fetchData(history.location.pathname)
       .then (info =>  { 
         console.log (info);
@@ -71,20 +62,13 @@ export default function App() {
       });
 
 
-    }, [])*/
-    const dispatch1 = useDispatch ()
-    const dispatch2 = useDispatch ()
-
-    useEffect (() => {
-      dispatch1 (fetchUser())
-      dispatch2 (fetchPanelData())      
-    }, [dispatch1, dispatch2]);
-
-    //if (!data) return (<p>12</p>)
+    }, [])
+    
+    if (!data) return (<p>12</p>)
     return (
       <div className="root">
         <NotificationContainer/>
-        <Menu user={user} panelData={panelData.data} />
+        <Menu user={user} panelData={panelData}/>
 
         <Router history={history}>
             { false && <Switch>

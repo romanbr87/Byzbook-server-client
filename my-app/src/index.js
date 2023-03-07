@@ -8,6 +8,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { AppError } from './components/AppError';
 import './styles/style.css';
+//import { dotenv } from 'dotenv'
+//dotenv.config();
 
 ReactDOM.render(
   <React.StrictMode>
