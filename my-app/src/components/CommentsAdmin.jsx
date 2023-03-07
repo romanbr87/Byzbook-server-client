@@ -1,13 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import ContactmessagesPanel from "../Panels/ContactmessagesPanel";
+import Menu from "../Panels/Menu";
+import CommentsAdminPanel from '../Panels/CommentsAdminPanel'
 import "../styles/style.css";
 
-export default function Contactmessages(props) {
+export default function CommentsAdmin (props) {
 
-    const text = "מסך הדיווח אפשר לנו לראות את הדיווחים השונים על העסקים השונים. בהתאם לדייוח, הדיווח ימחק או שהעסק יבוטל/ימחק"
-
-    return (
+   return (
     <React.Fragment>
         <Helmet>       
         <link rel="canonical" href="https://romanbr87.github.io/index/index.html" />
@@ -20,20 +19,19 @@ export default function Contactmessages(props) {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="byzbook" />
 
-        <title>מסך הודעות</title>
+        <title>מסך תגובות</title>
         </Helmet>
+        <Menu user={props.user}/> 
         
         <div className="container" style={{ marginTop: '0', paddingTop: '0', textAlign: 'right', direction: 'rtl' }}>
         
         <div className="jumbotron" style={{ padding: '0', borderRadius: '0' }}>
             <h2 className="title" id="title" style={{ textAlign: 'center', textDecoration: 'underline' }}>
-                מסך הודעות
+                מסך תגובות
             </h2>
-            <p>{text}</p>
-            { <h3 className="title">{props.data.length} הודעות</h3>}
         </div>
 
-        <ContactmessagesPanel {...props} />
+        <CommentsAdminPanel {...props} />
 
         </div>
     </React.Fragment>

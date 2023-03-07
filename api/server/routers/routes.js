@@ -172,8 +172,8 @@ function ensureAuthenticatedLogout (req, res, next) {
 
 /*-------------------------------------------------------*/
 
-router.post('/cnt', ensureAuthenticatedReq, async function(req, res, next) {
-  await getCnt()
+router.post('/cnt', ensureAuthenticatedReq, function(req, res, next) {
+  getCnt()
   .then (cnt => res.json(cnt))
   .catch (err => res.status (404).send({message: err}) );
 })
@@ -198,9 +198,27 @@ router.get('/BusinessPageEditor/:id', ensureAuthenticatedPage, function(req, res
     })  
 });
 
+router.post('/BusinessPageEditor/:id', ensureAuthenticatedPage, function(req, res, next) {
+  let id = req.params.id;
+  let query = { gsx$link: id }
+  business.findOne (query)
+  .then(async data => {
+    var myTypes = await types.find ({});
+    if (data == null || types == null) next ({ status: 404, message: "הדף לא קיים"})
+    else return res.json ({ types: myTypes, business: data });
+  })
+  .catch (err => res.status (404).json({message: err}) ) 
+});
+
 router.get('/NewBusiness', function(req, res, next) {
   fetchDataFromDB (req, res, next, false, async function (val, res) {
     return res.render('./Components/newBusiness', val);
+  })
+});  
+
+router.post('/NewBusiness', function(req, res, next) {
+  fetchDataFromDB (req, res, next, false, async function (val, res) {
+    return res.json(val);
   })
 });  
 
@@ -524,15 +542,15 @@ router.post('/page/:id', function(req, res, next) {
   let query = { gsx$link: id }
   business.findOne (query)
   .then(byz => {
-    if (byz == null) req.status (404).json ({ status: 404, message: "הדף לא קיים"})
+    if (byz == null) res.status (404).json ({ status: 404, message: "הדף לא קיים"})
     comment.find ({gsx$refID: byz._id, gsx$active: true})
       .then(comm => {
-        if (comm == null) req.status (404).jsont ({ status: 404, message: "הדף לא קיים"})
+        if (comm == null) res.status (404).json ({ status: 404, message: "הדף לא קיים"})
         else return res.json({ data: byz, comments: comm });
       })     
-      .catch(err => req.status (404).json ({ status: 404, message: err}) )
+      .catch(err => res.status (404).json ({ status: 404, message: err}) )
   })
-  .catch(err => req.status (404).json ({ status: 404, message: err}) )
+  .catch(err => res.status (404).json ({ status: 404, message: err}) )
 });
 
 /*-------------------------------------------------------*/
@@ -607,8 +625,8 @@ router.get('/*', function(req, res, next) {
 
 router.post('/*', function(req, res, next) {
   console.log (req);
-  //res.status (404).send({message: 'לא ניתן לקבל נתונים'})
-  next ({ status: 404, message: "לא ניתן לקבל נתונים"})
+  res.status (404).send({message: 'לא ניתן לקבל נתונים'})
+  //next ({ status: 404, message: "לא ניתן לקבל נתונים"})
 
 })
 /*-------------------------------------------------------*/

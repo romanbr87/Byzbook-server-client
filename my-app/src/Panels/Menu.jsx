@@ -1,11 +1,12 @@
 import React, { useMemo, } from "react";
-import { fetchData } from "../ContextAPI";
+import { useSelector } from "react-redux";
 import "../styles/style.css";
 
 export default function Menu(props) {
     
-    const user  = useMemo (() => props.user, [props]);
-    const userPaneldb = useMemo(() => props.userPaneldb, [props]);
+    //const user  = useMemo (() => props.user, [props]);
+    const user = useSelector (state => state.user)
+    const panelData = useMemo(() => props.panelData, [props]);
     
 
     /*const logout = () => {
@@ -44,24 +45,24 @@ export default function Menu(props) {
         <li><a href="/about">אודות</a></li>
         <li><a href="/Contact">ייצרת קשר</a></li>        
         {props.children}
-        { (user && userPaneldb) ?
+        { (user.role) ?
         <li className="dropdown">
         <a href="/" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
         כלי ניהול<span className="caret"></span></a>
         <ul className="dropdown-menu">
             <li><a href="#" className="text-right" onClick={e=> { e.preventDefault(); console.clear() } }>איפוס קונסול</a></li>
             <li><a href="/administrator" className="text-right">מנהל אתר</a></li>
-            <li><a href="/BusinessEditor" className="text-right">עריכת עסק <span className="pull-left"><span className="badge">{userPaneldb.businesses}</span></span></a></li>
-            <li><a href="/TypesEditor" className="text-right">טיפוסי עסק <span className="pull-left"><span className="badge">{userPaneldb.businesstypes}</span></span></a></li>
-            <li><a href="/Reports" className="text-right">דיווחים על עסק <span className="pull-left"><span className="badge">{userPaneldb.reports}</span></span></a></li>
+            <li><a href="/BusinessEditor" className="text-right">עריכת עסק <span className="pull-left"><span className="badge">{panelData?.businesses}</span></span></a></li>
+            <li><a href="/TypesEditor" className="text-right">טיפוסי עסק <span className="pull-left"><span className="badge">{panelData?.businesstypes}</span></span></a></li>
+            <li><a href="/Reports" className="text-right">דיווחים על עסק <span className="pull-left"><span className="badge">{panelData?.reports}</span></span></a></li>
             {(1==2) && <li role="separator" className="divider"></li>}
-            <li><a href="/Contactmessages" className="text-right">הודעות <span className="pull-left"><span className="badge">{userPaneldb.messages}</span></span></a></li>
-            <li><a href="/Imgs" className="text-right">תמונות <span className="pull-left"><span className="badge">{userPaneldb.images}</span></span></a></li>
-            <li><a href="/CommentsAdmin" className="text-right">תגובות <span className="pull-left"><span className="badge">{userPaneldb.comments}</span></span></a></li>
+            <li><a href="/Contactmessages" className="text-right">הודעות <span className="pull-left"><span className="badge">{panelData?.messages}</span></span></a></li>
+            <li><a href="/Imgs" className="text-right">תמונות <span className="pull-left"><span className="badge">{panelData?.images}</span></span></a></li>
+            <li><a href="/CommentsAdmin" className="text-right">תגובות <span className="pull-left"><span className="badge">{panelData?.comments}</span></span></a></li>
         </ul> 
         </li> : '' }
         <li><a href="/newBusiness">עסק חדש</a></li>        
-        { !user ? 
+        { !user.role ? 
             <li><a href="/login">התחברות</a></li> 
             : 
             <li><a href="/logout">התנתקות</a></li> 

@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import ContactmessagesPanel from "../Panels/ContactmessagesPanel";
+import { isBrowser } from "react-device-detect";
+import ContactForm from "../Panels/ContactForm"
 import "../styles/style.css";
 
-export default function Contactmessages(props) {
-
-    const text = "מסך הדיווח אפשר לנו לראות את הדיווחים השונים על העסקים השונים. בהתאם לדייוח, הדיווח ימחק או שהעסק יבוטל/ימחק"
+export default function Contact(props) {
 
     return (
     <React.Fragment>
@@ -20,22 +19,19 @@ export default function Contactmessages(props) {
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="byzbook" />
 
-        <title>מסך הודעות</title>
+        <title>אודות</title>
         </Helmet>
         
-        <div className="container" style={{ marginTop: '0', paddingTop: '0', textAlign: 'right', direction: 'rtl' }}>
-        
-        <div className="jumbotron" style={{ padding: '0', borderRadius: '0' }}>
-            <h2 className="title" id="title" style={{ textAlign: 'center', textDecoration: 'underline' }}>
-                מסך הודעות
-            </h2>
-            <p>{text}</p>
-            { <h3 className="title">{props.data.length} הודעות</h3>}
+        <div className={isBrowser ? "container" : "container-fluid"}>       
+        <div className="jumbotron">
+            <h2 className="title" id="title" style={{ textAlign: 'center', textDecoration: 'underline' }}>ייצרת קשר</h2>
         </div>
-
-        <ContactmessagesPanel {...props} />
-
+        
+        <div className="row">        
+            <ContactForm className={isBrowser ? "col-lg-4 col-md-4 col-lg-offset-4 col-md-offset-4" : ""}/>
+        </div>
         </div>
     </React.Fragment>
     )
-}
+}   
+

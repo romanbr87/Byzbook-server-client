@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { isBrowser, isMobile } from "react-device-detect";
+import { isBrowser } from "react-device-detect";
 import "../styles/style.css";
-import { serverURL } from "../ContextAPI";
+import { fetchData } from "../ContextAPI";
 
 export default function ContactmessagesPanel (props) {
 
@@ -19,7 +19,7 @@ export default function ContactmessagesPanel (props) {
             body: JSON.stringify({ data: obj._id } )
         };
         
-        fetch(serverURL('/deletemessage'), requestOptions)
+        fetchData('/deletemessage', 'put', { data: obj._id })
         .then (e=> {
             var arr = [...list];
             arr = arr.filter (e=> e._id !==  obj._id);

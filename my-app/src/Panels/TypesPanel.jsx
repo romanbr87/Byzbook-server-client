@@ -63,7 +63,6 @@ export default function TypesPanel (props) {
         setTypes(arr);
         alert ("ערך " + val + " נמחק");
         return true;
-    
     }
 
     const updateVal = async (val, id) => {

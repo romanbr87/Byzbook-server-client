@@ -4,34 +4,22 @@ import { isBrowser } from "react-device-detect";
 import Menu from "../Panels/Menu";
 
 import BusinessCard from "../Panels/BusinessCard";
-import { serverURL } from "../ContextAPI";
+import { fetchData } from "../ContextAPI";
 import "../styles/style.css";
 
 export default function About(props) {
 
     const [business, setBusiness] = useState (props.business)
-    const getBusiness = async (e) => {
+    const getBusiness = (e) => {
         e.preventDefault();
 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-        };
+        fetchData('/about')
+        .then (business => setBusiness (business.business))
+        .catch (err => alert ("לא ניתן לקבל עסק חדש"))
 
-        try {
-            let res = await fetch(serverURL('/about'), requestOptions);
-            let business = (await res.json()).business;
-            if (res.ok) {
-                setBusiness (business);
-            }
-
-            else {
-                alert ("לא ניתן לקבל עסק חדש");
-            }
-        }
-
-        catch (e) { console.log (e) }
+        return true;
     }
+
 
     return (
     <React.Fragment>

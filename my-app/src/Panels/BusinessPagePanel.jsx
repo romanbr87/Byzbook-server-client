@@ -1,18 +1,15 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { isBrowser } from 'react-device-detect';
-import SiteBtnPanel from '../Element/SiteBtnPanel';
-
+import React, { useMemo } from 'react';
 import {Consumer} from '../ContextAPI'
+import SiteBtnPanel from '../Element/SiteBtnPanel';
 
 import '../styles/App.css';
 import '../styles/style.css';
 import '../styles/bootstrap-social.css'
 
-const whatsappURL = isBrowser ? 'https://web.whatsapp.com/' : 'whatsapp://';
 
-export default function BusinessCard ({data: {gsx$link, gsx$name, gsx$logo="https://res.cloudinary.com/byzbook/image/upload/v1673717520/X.jpg", 
-gsx$logoheight, gsx$address, gsx$city, gsx$phone, gsx$whatsapp, gsx$email, gsx$facebook, gsx$instagram, gsx$website, gsx$comment
-, gsx$worktime, gsx$desc }, isLinkable, ...props}) {
+export default function BusinessPagePanel ({data: {gsx$link, gsx$name, gsx$logo="https://res.cloudinary.com/byzbook/image/upload/v1673717520/X.jpg", gsx$logoheight, 
+gsx$address, gsx$city, gsx$phone, gsx$whatsapp, gsx$email, gsx$facebook, gsx$instagram, gsx$website, gsx$comment
+, gsx$worktime, gsx$desc},  isLinkable, ...props}) {
 
     
     
@@ -25,11 +22,10 @@ gsx$logoheight, gsx$address, gsx$city, gsx$phone, gsx$whatsapp, gsx$email, gsx$f
         return "#" + Math.floor(Math.random()*16777215).toString(16);
     }*/
 
-    const emptyVal = (val) => (val == undefined || val == null || val.trim() == '')
 
     return (
         <div {...props}>
-            <div className="panel panel-info">
+            <div className="panel-info" style={{backgroundColor: 'white'}}>
                 <div className="panel-heading">
                     {
                         (isLinkable) ? 
@@ -48,6 +44,7 @@ gsx$logoheight, gsx$address, gsx$city, gsx$phone, gsx$whatsapp, gsx$email, gsx$f
                         margin: "0", padding: "0", width: "100%"}}/>
                     </div>
                     
+                    <h4>קצת על העסק</h4>
                     <p className="text caption" style={{maxHeight: "100px", margin: "0", padding: "0"}}>{gsx$desc}</p>
                     <br/>
                     <SiteBtnPanel gsx$whatsapp={gsx$whatsapp} gsx$facebook={gsx$facebook} gsx$website={gsx$website} 
@@ -77,7 +74,7 @@ gsx$logoheight, gsx$address, gsx$city, gsx$phone, gsx$whatsapp, gsx$email, gsx$f
                         <React.Fragment>
                         <hr />
                         <a title="אימייל" href={businessEmail}>
-                        <span>{gsx$email === '' ? '' : gsx$email}</span><i className="fa fa-fw fa-envelope-o"></i>
+                        <span>{gsx$email == '' ? '' : gsx$email}</span><i className="fa fa-fw fa-envelope-o"></i>
                         </a>
                         </React.Fragment>
                         }
@@ -95,6 +92,12 @@ gsx$logoheight, gsx$address, gsx$city, gsx$phone, gsx$whatsapp, gsx$email, gsx$f
                         }
                         <hr/>
                         
+                        <Consumer>
+                            { (value) =>
+                            <button type="button" className="center-block btn btn-danger" data-toggle="modal" data-target="#myModal"
+                            onClick={e => value(e)} style={{marginTop: "4%", marginBottom: '0%'}}>דיווח</button>   
+                            }
+                        </Consumer>
                     </div>
                 </div>
             </div>

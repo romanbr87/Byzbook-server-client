@@ -47,13 +47,30 @@ export const getCities = (setCities) => {
 }
 
 export const fetchData = async (url, method='POST', data = null) => {
+    const urls = ['/contact']
+    if (urls.some(currUrl => currUrl.toLowerCase() === url.toLowerCase())) {
+        return Promise.resolve(true);
+    }
+      
     let requestOptions = {
         method: method,
         headers: {'Content-Type': 'application/json'},
     }
     
     if (data !== null) requestOptions.body = JSON.stringify (data);
-    const response = await fetch(`http://localhost:8080${url}`, requestOptions)
+    try {
+        const response = await fetch(`http://localhost:8080${url}`, requestOptions)
+        const result = await response.json();
+        if (result?.status === 404) throw new Error (result.message);
+        return result
+    }
 
-    return await response.json();
+    catch (err) {
+        throw new Error (err); 
+    } 
+}
+
+export const getPost = async (url) => {
+    //alert (`url: ${url}`);
+    return await fetchData (url, "post"); 
 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import TypesPanel from "../Panels/TypesPanel";
-import Menu from "../Panels/Menu";
 import "../styles/style.css";
 
 export default function TypesEditor(props) {

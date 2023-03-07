@@ -26,10 +26,6 @@
     font-size: medium;
 }
 
-.commentPanel {
-    margin-top: 42em;
-}
-
 div[contentEditable]{
     background-color: white;
     border: 1px solid black;
