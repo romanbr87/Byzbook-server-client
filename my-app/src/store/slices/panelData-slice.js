@@ -1,9 +1,9 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+  import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { getPost } from '../../ContextAPI'
 
 export const fetchPanelData = createAsyncThunk('panelData/fetchData', async () => {
-    const response = await getPost ('/cnt');
-    return response;
+    const response = (await getPost ('/cnt')).data;
+    return ;
 });
 
 const panelDataSlice = createSlice({
@@ -31,7 +31,7 @@ const panelDataSlice = createSlice({
     })
     
     builder.addCase (fetchPanelData.rejected, (state, action) => {
-        state.status = `error: ${JSON.stringify(action, null, 2)}`;
+        state.status = action; //`error: ${JSON.stringify(action, null, 2)}`;
         state.data = '';
     })
   

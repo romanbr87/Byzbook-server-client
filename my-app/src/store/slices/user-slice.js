@@ -3,7 +3,7 @@ import { getPost } from '../../ContextAPI'
 
 export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
     const response = await getPost ('/user');
-    return response.username;
+    return response.user;
   });
 
 const userSlice = createSlice({
@@ -18,7 +18,7 @@ const userSlice = createSlice({
     })
     
     builder.addCase (fetchUser.rejected, (state, action) => {
-        state.status = `error: ${JSON.stringify(action, null, 2)}`;
+        state.status = action; //`error: ${JSON.stringify(action, null, 2)}`;
         state.username = '';
         state.role = '';
     })

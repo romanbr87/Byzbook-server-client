@@ -73,7 +73,21 @@ export const fetchData = async (url, method='POST', data = null) => {
     } 
 }
 
-export const getPost = (url) => {
-    return axios.get (url);
+export const getPost = async (url) => {
+    var req = axios.post (`http://localhost:8080${url}`, {
+        headers: {'Content-Type': 'application/json'},
+    });
+
+    req.then (d => d.json())
+    .then(d => {
+        console.log ("sucess:")
+        console.log (d);
+    })
+    .catch(d => {
+        console.log ("reject:")
+        console.log (d.response.data);
+    })
+
+    return req;
     //return await fetchData (url); 
 }
