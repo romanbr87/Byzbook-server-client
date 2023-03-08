@@ -25,7 +25,7 @@ import { fetchPanelData } from './store/slices/panelData-slice';
 
 export default function App() {
   const user = useSelector (state => state.user)
-  const panelData = useSelector (state => state.panelData.data);  
+  const panelData = useSelector (state => state.panelData);  
   const dispatch = useDispatch ()
 
   
@@ -34,8 +34,8 @@ export default function App() {
   const history = createBrowserHistory();   
 
     useEffect(() => {
-      dispatch (fetchPanelData());
       dispatch(fetchUser());
+      dispatch (fetchPanelData());
   
       console.clear ();
 

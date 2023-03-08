@@ -33,8 +33,4 @@ const userSlice = createSlice({
   }
 });
 
-const getSelectedData = selector => (dispatch, getState) => {
-  return selector(getState())
-}
-
 export default userSlice.reducer;

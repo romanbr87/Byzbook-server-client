@@ -1,4 +1,5 @@
 import React from 'react';
+import axios, {isCancel, AxiosError} from 'axios';
 const context = React.createContext();
 
 export const serverURL = (url) => `http://localhost:8080${url}`;
@@ -47,11 +48,11 @@ export const getCities = (setCities) => {
 }
 
 export const fetchData = async (url, method='POST', data = null) => {
-    const urls = ['/contact']
+    /*const urls = ['/contact']
     if (urls.some(currUrl => currUrl.toLowerCase() === url.toLowerCase())) {
         return Promise.resolve(true);
-    }
-      
+    }*/
+
     let requestOptions = {
         method: method,
         headers: {'Content-Type': 'application/json'},
@@ -61,6 +62,8 @@ export const fetchData = async (url, method='POST', data = null) => {
     try {
         const response = await fetch(`http://localhost:8080${url}`, requestOptions)
         const result = await response.json();
+        /*console.log (`URL: ${url} : RES:`)
+        console.log (result);*/
         if (result?.status === 404) throw new Error (result.message);
         return result
     }
@@ -71,6 +74,5 @@ export const fetchData = async (url, method='POST', data = null) => {
 }
 
 export const getPost = async (url) => {
-    //alert (`url: ${url}`);
     return await fetchData (url, "post"); 
 }
