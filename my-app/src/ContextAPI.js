@@ -73,6 +73,7 @@ export const fetchData = async (url, method='POST', data = null) => {
     } 
 }
 
-export const getPost = async (url) => {
-    return await fetchData (url, "post"); 
+export const getPost = (url) => {
+    return axios.get (url);
+    //return await fetchData (url); 
 }

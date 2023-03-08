@@ -153,20 +153,30 @@ function ensureAuthenticatedPage(req, res, next) {
 function ensureAuthenticatedReq(req, res, next) { 
   console.log (`AUTH: ${req.isAuthenticated()}`)
   if (req.isAuthenticated()) return next(); 
-  else res.status(511).json({message: "אי אפשר לתת נתונים"})
+  else res.status(403).json({message: "אי אפשר לתת נתונים"})
 }
 
 function ensureAuthenticatedLogin (req, res, next) { 
-  if (req.isAuthenticated()) next ({ status: 511, message: "הדף לא קיים"}); 
+  if (req.isAuthenticated()) next ({ status: 403, message: "הדף לא קיים"}); 
   else  return next();  
 }
 
 function ensureAuthenticatedLogout (req, res, next) { 
-  if (!req.isAuthenticated()) next ({ status: 511, message: "הדף לא קיים"}); 
+  if (!req.isAuthenticated()) next ({ status: 403, message: "הדף לא קיים"}); 
   else  return next();  
 }
 
 /*-------------------------------------------------------*/
+router.get('/user', ensureAuthenticatedReq, function(req, res, next) {
+  res.send (req.user);
+})
+
+router.get('/cnt', ensureAuthenticatedReq, function(req, res, next) {
+  getCnt()
+  .then (cnt => res.json(cnt))
+  .catch (err => res.status (404).send({message: err}) );
+})
+
 
 router.post('/user', ensureAuthenticatedReq, function(req, res, next) {
   res.send (req.user);
