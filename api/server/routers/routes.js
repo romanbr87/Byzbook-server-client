@@ -68,7 +68,7 @@ passport.use('local-login', new LocalStrategy(
 
 }))
 
-router.use(function (req, res, next) { 
+/*router.use(function (req, res, next) { 
   console.log (req.body)
   if (!req.user) 
   passport.authenticate('local-login', function(err, user, info) {
@@ -80,7 +80,7 @@ router.use(function (req, res, next) {
     });
   })(req, res, next);
   else next();
-})
+})*/
 
 router.get('/login', function(req, res, next) {
   console.log ("user: ", req.user);

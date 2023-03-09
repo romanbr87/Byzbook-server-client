@@ -27,7 +27,7 @@ const userSlice = createSlice({
     builder.addCase (fetchUser.fulfilled, (state, action) => {
         console.log (action);
         state.status = 'ready';
-        state.username = action.payload.data;
+        state.username = action.payload;
         state.role = 'admin';
     })
 
