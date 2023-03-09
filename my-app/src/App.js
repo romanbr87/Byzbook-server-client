@@ -24,7 +24,7 @@ import { fetchUser } from './store/slices/user-slice';
 import { fetchPanelData } from './store/slices/panelData-slice';
 
 export default function App() {
-  const user = useSelector (state => state.user)
+    const user = useSelector (state => state.user)
   const panelData = useSelector (state => state.panelData);  
   const dispatch = useDispatch ()
 

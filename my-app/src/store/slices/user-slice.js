@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getPost } from '../../ContextAPI'
+import { fetchData, getPost } from '../../ContextAPI'
 
 export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
-  return (await getPost ('/user')).response.data;
+  const res = await getPost ('/user');
+  return res;
+
 });
 
 const userSlice = createSlice({
@@ -25,11 +27,15 @@ const userSlice = createSlice({
     builder.addCase (fetchUser.fulfilled, (state, action) => {
         console.log (action);
         state.status = 'ready';
-        state.username = action.payload;
+        state.username = action.payload.data;
         state.role = 'admin';
     })
 
   }
 });
+
+const getSelectedData = selector => (dispatch, getState) => {
+  return selector(getState())
+}
 
 export default userSlice.reducer;

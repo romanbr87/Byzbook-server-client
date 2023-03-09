@@ -4,7 +4,7 @@ import "../styles/style.css";
 export default function Menu(props) {
     
     const user  = useMemo (() => props.user, [props]);
-    const panelData = useMemo (() => {}, []) //props.panelData, [props] )
+    const panelData = useMemo (() => props.panelData, [props] )
 
     /*const logout = () => {
         const requestOptions = {

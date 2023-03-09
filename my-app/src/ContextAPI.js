@@ -59,37 +59,20 @@ export const fetchData = async (url, method='POST', data = null) => {
     }
     
     if (data !== null) requestOptions.body = JSON.stringify (data);
-    try {
-        const response = await fetch(`http://localhost:8080${url}`, requestOptions)
-        const result = await response.json();
-        /*console.log (`URL: ${url} : RES:`)
-        console.log (result);*/
-        if (result?.status === 404) throw new Error (result.message);
-        return result
-    }
-
-    catch (err) {
-        throw new Error (err); 
-    } 
+    const response = await fetch(`http://localhost:8080${url}`, requestOptions)
+    const result = response.json();
+    return result
 }
 
 export const getPost = async (url) => {
     var req = axios.post (`http://localhost:8080${url}`, {
         headers: {'Content-Type': 'application/json'},
-    });
+    }).then (d => d).catch (err => err.response);
     
-    req
-    /*var req = await fetchData (url); 
-    req.then (d => d.json())*/
-
-    .then(d => {
-        console.log ("sucess:")
-        console.log (d);
-    })
-    .catch(d => {
-        console.log ("reject:")
-        console.log (d);
-    })
+    //req*/
+    //var req = await fetchData (url)
+    console.log ("Req:")
+    console.log (req);
 
     return req;
     
