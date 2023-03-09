@@ -2,9 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { getPost } from '../../ContextAPI'
 
 export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
-    const response = await getPost ('/user');
-    return response.user;
-  });
+  return (await getPost ('/user')).response.data;
+});
 
 const userSlice = createSlice({
   name: 'user',

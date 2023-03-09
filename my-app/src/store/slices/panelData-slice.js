@@ -2,8 +2,7 @@
 import { getPost } from '../../ContextAPI'
 
 export const fetchPanelData = createAsyncThunk('panelData/fetchData', async () => {
-    const response = (await getPost ('/cnt')).data;
-    return ;
+    return (await getPost ('/cnt')).response.data;
 });
 
 const panelDataSlice = createSlice({
