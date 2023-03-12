@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { isEqual } from "lodash";
+import { fetchData } from "../ContextAPI";
 
 import BusinessCard from "../Panels/BusinessCard"
 import CityList from "../Element/CityList";
@@ -109,20 +110,16 @@ export default function BusinessPageEditor(props) {
             body: JSON.stringify({ data: localData })
         };
 
-        let res = await fetch('../businessUpdate', requestOptions)
-        let json = await res.json();
-        
-        if (res?.ok == false || res?.ok == undefined || res?.ok == null) {
-            alert ("לא ניתן לעדכן את הערך");
-            return;
-        }
-        
-        alert ("העסק עודכן");
+        await fetchData('/businessUpdate', 'put', { data: localData })
+        .then (data => {
+            alert ("העסק עודכן");
 
-        console.clear();       
-        setDefaultData (json);
-        setLocalData (json);
-        setChanged (false);
+            console.clear();       
+            setDefaultData (data);
+            setLocalData (data);
+            setChanged (false);
+        })
+        .catch (err =>  alert ("לא ניתן לעדכן את הערך"))
     }
 
     const loadItem = () => {

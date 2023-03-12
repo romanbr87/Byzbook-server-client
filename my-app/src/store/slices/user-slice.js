@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { fetchData, getPost } from '../../ContextAPI'
 
 export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
-  const res = await getPost ('/user');
+  const res = getPost ('/user');
   return res;
 
 });
@@ -20,12 +20,11 @@ const userSlice = createSlice({
     
     builder.addCase (fetchUser.rejected, (state, action) => {
         state.status = action; //`error: ${JSON.stringify(action, null, 2)}`;
-        state.username = '';
+        state.username = action.error;
         state.role = '';
     })
   
     builder.addCase (fetchUser.fulfilled, (state, action) => {
-        console.log (action);
         state.status = 'ready';
         state.username = action.payload;
         state.role = 'admin';
@@ -33,9 +32,5 @@ const userSlice = createSlice({
 
   }
 });
-
-const getSelectedData = selector => (dispatch, getState) => {
-  return selector(getState())
-}
 
 export default userSlice.reducer;

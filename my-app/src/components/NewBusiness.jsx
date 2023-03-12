@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Helmet } from "react-helmet";
 import { isEqual } from "lodash";
 import BusinessCard from "../Panels/BusinessCard"
@@ -17,6 +17,7 @@ export default function NewBusiness(props) {
     const [localData, setLocalData] = useState();
     const [editable, setEditable] = useState (true);
     const [fun, setFun] = useState ();
+    const user  = useMemo (() => props.user, [props]);
 
     const text = "ברוכים הבאים למסך ערכית עסקים. כאן תוכלו לערוך את העסקים ולהוסיף עסקים חדשים. כל עסק ניתן להציג על המסך ולראות איך הוא נראה";
     const newBusinessData = {
@@ -125,13 +126,12 @@ export default function NewBusiness(props) {
         const filtered = dataEntries.filter(([key, value]) => value !== undefined && value != null && value);
         data = Object.fromEntries(filtered);
         data.gsx$active = false;
-        data.gsx$link = String(list.length);
-         
+        data.gsx$link = String(list.length+1);
         fetchData('/businessCreate', 'put', { data: data })
         .then ((newData) => {
-        alert ("העסק " + newData.gsx$name + " נוצר");       
-        //if (props.user !== undefined) window.location.href = "/BusinessPageEditor/" +  data.gsx$link;
-       // else window.location.href = "/";
+            alert ("העסק " + newData.gsx$name + " הוגש למערכת");       
+            if (user === 'admin') window.location.href = "/BusinessPageEditor/" +  data.gsx$link;
+            else window.location.href = "/";
         })
         .catch (err => {console.log(err); alert ("לא ניתן ליצור עסק חדש"); })
     }

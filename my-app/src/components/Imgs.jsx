@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import Menu from "../Panels/Menu";
 import ImgsPanel from "../Panels/ImgsPanel";
@@ -6,6 +6,10 @@ import "../styles/style.css";
 
 export default function Imgs (props) {
     
+	useEffect(() => {    
+		console.log (props);
+    }, [props])
+
     return (
 	<React.Fragment>
     <Helmet>
@@ -21,7 +25,6 @@ export default function Imgs (props) {
 
     <title>"אינדקס עסקים"</title>
     </Helmet>
-    <Menu user={props.user}/>        
         
     <div className="container" style={{ marginTop: '0', paddingTop: '0', textAlign: 'right', direction: 'rtl' }}>
     
@@ -32,7 +35,7 @@ export default function Imgs (props) {
         <p></p>
     </div>
 
-    <ImgsPanel {...props} />
+    { false && <ImgsPanel {...props} /> }
 
     </div>	
     </React.Fragment>

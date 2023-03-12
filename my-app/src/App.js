@@ -24,7 +24,7 @@ import { fetchUser } from './store/slices/user-slice';
 import { fetchPanelData } from './store/slices/panelData-slice';
 
 export default function App() {
-    const user = useSelector (state => state.user)
+  const user = useSelector (state => state.user)
   const panelData = useSelector (state => state.panelData);  
   const dispatch = useDispatch ()
 
@@ -54,24 +54,26 @@ export default function App() {
 
       fetchData(history.location.pathname)
       .then (info =>  { 
-        console.log (info);
         setData (info)
       }).catch (err => {
-        console.log ("ERR:")
         console.log (err);
       });
 
-
+      /*console.log ("User:")
+      console.log (user);
+      
+      console.log ("panelData:")
+      console.log (panelData);*/
     }, [])
     
     if (!data) return (<p>12</p>)
     return (
-      <div className="root">
+      <React.Fragment>
         <NotificationContainer/>
         <Menu user={user} panelData={panelData}/>
 
         <Router history={history}>
-            { false && <Switch>
+          <Switch>
             <Route exact path='/' render={() => <HomePage {...data} />} />
             <Route path='/about' render={() => <About {...data} />} />
             <Route path='/typeseditor' render={({ match }) => <TypesEditor {...data } />  } />
@@ -87,9 +89,9 @@ export default function App() {
               
                          
             <Route exact path='*' component={()=>{return <p>Null</p> }} status={404}/>
-            </Switch> }
+          </Switch>
         </Router>
-      </div>
+      </React.Fragment>
     );
 }
 

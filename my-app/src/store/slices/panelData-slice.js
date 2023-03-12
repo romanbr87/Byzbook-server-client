@@ -3,7 +3,6 @@ import { getPost } from '../../ContextAPI'
 
 export const fetchPanelData = createAsyncThunk('panelData/fetchData', async () => {
     const response = await getPost ('/cnt');
-    console.log (response);
     return response;
 });
 
@@ -32,13 +31,13 @@ const panelDataSlice = createSlice({
     })
     
     builder.addCase (fetchPanelData.rejected, (state, action) => {
-        state.status = `error: ${JSON.stringify(action, null, 2)}`;
-        state.data = '';
+        state.status = action; //`error: ${JSON.stringify(action, null, 2)}`;
+        state.data = action.error;
     })
   
     builder.addCase (fetchPanelData.fulfilled, (state, action) => {
         state.status = 'ready';
-        state.data = action;
+        state.data = action.payload;
     })
 
     }

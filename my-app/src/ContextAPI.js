@@ -47,10 +47,30 @@ export const getCities = (setCities) => {
         });
 }
 
-export const fetchData = async (url, method='POST', data = null) => {
-    /*const urls = ['/contact']
+export const fetchData =  async (url, method='POST', dataForServer = null) => {
+    const urls = ['/contact']
     if (urls.some(currUrl => currUrl.toLowerCase() === url.toLowerCase())) {
         return Promise.resolve(true);
+    }
+
+    /*let requestOptions = {
+        method: method,
+        headers: {'Content-Type': 'application/json'},
+    }
+    
+    if (data !== null) requestOptions.body = JSON.stringify (data);
+
+    try {
+        const response = await fetch(`http://localhost:8080${url}`, requestOptions)
+        if (!response.ok) {
+            throw new Error(`${response.status}`);
+        }
+        return response.json();
+    } 
+    
+    catch (err) {
+        //console.error(`GET error: ${err}`);
+        throw Error(`${err}`);
     }*/
 
     let requestOptions = {
@@ -58,28 +78,26 @@ export const fetchData = async (url, method='POST', data = null) => {
         headers: {'Content-Type': 'application/json'},
     }
     
-    if (data !== null) requestOptions.body = JSON.stringify (data);
-    const response = await fetch(`http://localhost:8080${url}`, requestOptions)
-    //const result = response.json();
-    return response; //.then (data => data.json()).then (data => data).catch (err => err);
-}
+    if (dataForServer !== null) requestOptions.data = dataForServer;
 
-export const getPost = async (url) => {
-    var req = axios.post (`http://localhost:8080${url}`, {
-        headers: {'Content-Type': 'application/json'},
-    })
 
     try {
-        return req.then (data => data);
+        let  {data} = await (await axios(`http://localhost:8080${url}`, requestOptions))
+        console.log (data);
+        return data;
+    } 
+    
+    catch (error) {
+        console.log (error.response);
+        const customError = new Error(error.response.data.message)
+        throw customError;
     }
-
-    catch (err) { throw new Error (err) } 
-    //req*/
+} 
     
-    //var req = await fetchData (url)
-    /*console.log ("Req:")
-    console.log (req);*/
-
-    return req;
+        
     
-}
+
+export const getPost = async (url) => {
+    return await fetchData (url);
+}    
+

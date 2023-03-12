@@ -44,8 +44,9 @@ export default function CommentsAdminPanel (props) {
         setDefaultList(data);
     }, [])
 
-    if (!list) return <React.Fragment/>
-    return (
+    //if (!list) return <React.Fragment/>
+    return <p>12</p>
+    /*return (
     <React.Fragment>
  
         <div className={isBrowser ? "col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-2" : ''}>
@@ -98,5 +99,5 @@ export default function CommentsAdminPanel (props) {
         </div>
 
     </React.Fragment>
-    )
+    )*/
 }

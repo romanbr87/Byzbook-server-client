@@ -8,10 +8,10 @@ export default function ImgsPanel (props) {
 
 	useEffect(() => {    
 		if (!imgs) {
-                        var data = props.data
+            
+            var data = props.data
             data = data.sort((a, b) => a.gsx$refID.gsx$name.localeCompare(b.gsx$refID.gsx$name))
             setImgs (data);
-
             setDidMount(true);   
         }
 		

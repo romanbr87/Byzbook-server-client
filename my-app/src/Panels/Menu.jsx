@@ -1,10 +1,12 @@
 import React, { useMemo } from "react";
+import { useEffect } from "react";
+import { ReactDOM } from "react";
 import "../styles/style.css";
 
 export default function Menu(props) {
     
     const user  = useMemo (() => props.user, [props]);
-    const panelData = useMemo (() => props.panelData, [props] )
+    const panelData = useMemo (() => props.panelData.data, [props])
 
     /*const logout = () => {
         const requestOptions = {
@@ -22,6 +24,13 @@ export default function Menu(props) {
 
     }*/
 
+    useEffect (() => {
+        console.log ("User:")
+        console.log (user);
+        
+        console.log ("panelData:")
+        console.log (panelData);  
+    })
     return ( 
         <>
         <nav className="navbar navbar-inverse navbar-fixed-top">
