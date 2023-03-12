@@ -35,7 +35,7 @@ export default function Imgs (props) {
         <p></p>
     </div>
 
-    { false && <ImgsPanel {...props} /> }
+    <ImgsPanel {...props} /> 
 
     </div>	
     </React.Fragment>
