@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getCities } from "../ContextAPI";
+import { getCities } from "../api";
 import "../styles/style.css";
 
 export default function CityList(props) {

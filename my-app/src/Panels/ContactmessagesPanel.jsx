@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { isBrowser } from "react-device-detect";
 import "../styles/style.css";
-import { fetchData } from "../ContextAPI";
+import { fetchData } from "../api";
 
 export default function ContactmessagesPanel (props) {
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import '../styles/style.css';
 import "../styles/comments.css";
-import { fetchData } from "../ContextAPI";
+import { fetchData } from "../api";
 
 export default function Comments(props) {
     const [name, setName] = useState ("רומן");

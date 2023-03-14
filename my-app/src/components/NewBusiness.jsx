@@ -4,7 +4,7 @@ import { isEqual } from "lodash";
 import BusinessCard from "../Panels/BusinessCard"
 import CityList from "../Element/CityList";
 import TagsInput from "../Element/TagsInput"
-import { fetchData, getCities } from "../ContextAPI";
+import { fetchData, getCities } from "../api";
 import "../styles/style.css";
 
 export default function NewBusiness(props) {

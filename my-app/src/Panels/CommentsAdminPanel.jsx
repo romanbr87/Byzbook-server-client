@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { isBrowser, isMobile } from "react-device-detect";
-import { fetchData } from "../ContextAPI";
+import { fetchData } from "../api";
 import CheckBox from "../Element/CheckBox";
 import "../styles/style.css";
 
@@ -39,14 +39,13 @@ export default function CommentsAdminPanel (props) {
     }
 
     useEffect(() => {       
-        let data = JSON.parse(JSON.stringify(props.data))
+        let data = props.data
         setList(data);
         setDefaultList(data);
     }, [])
 
-    //if (!list) return <React.Fragment/>
-    return <p>12</p>
-    /*return (
+    if (!list) return <React.Fragment/>
+    return (
     <React.Fragment>
  
         <div className={isBrowser ? "col-lg-10 col-md-10 col-lg-offset-1 col-md-offset-2" : ''}>
@@ -99,5 +98,5 @@ export default function CommentsAdminPanel (props) {
         </div>
 
     </React.Fragment>
-    )*/
+    )
 }

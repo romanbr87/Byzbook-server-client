@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
 import { isEqual } from "lodash";
-import { fetchData } from "../ContextAPI";
+import { fetchData } from "../api";
 
 import BusinessCard from "../Panels/BusinessCard"
 import CityList from "../Element/CityList";

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Helmet } from "react-helmet";
-import Menu from "../Panels/Menu";
 import CommentsAdminPanel from '../Panels/CommentsAdminPanel'
 import "../styles/style.css";
 
@@ -21,7 +20,6 @@ export default function CommentsAdmin (props) {
 
         <title>מסך תגובות</title>
         </Helmet>
-        <Menu user={props.user}/> 
         
         <div className="container" style={{ marginTop: '0', paddingTop: '0', textAlign: 'right', direction: 'rtl' }}>
         

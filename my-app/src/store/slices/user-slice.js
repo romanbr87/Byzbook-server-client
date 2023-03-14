@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { fetchData, getPost } from '../../ContextAPI'
+import { fetchData, getPost } from '../../api'
 
 export const fetchUser = createAsyncThunk('user/fetchUser', async () => {
   const res = getPost ('/user');

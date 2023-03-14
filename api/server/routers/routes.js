@@ -268,7 +268,7 @@ router.get('/typesEditor', ensureAuthenticatedPage, function(req, res, next) {
   .catch(err => next ({ status: 404, message: err}))
 });
 
-router.post('/typesEditor', ensureAuthenticatedReq, function(req, res, next) {
+router.post('/types', ensureAuthenticatedReq, function(req, res, next) {
   types.find ({ })
   .then(data => {
       return res.json({types: data});

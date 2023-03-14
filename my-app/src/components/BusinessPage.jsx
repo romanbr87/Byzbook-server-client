@@ -5,7 +5,7 @@ import BusinessPagePanel from "../Panels/BusinessPagePanel"
 import Comments from "../Panels/Comments";
 import ReportModal from './ReportModal';
 
-import {Provider} from '../ContextAPI'
+import {Provider} from '../api'
 import "../styles/style.css";
 import "../styles/comments.css";
 

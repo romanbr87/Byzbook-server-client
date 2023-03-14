@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchData } from "../ContextAPI";
+import { fetchData } from "../api";
 
 export default function ContactForm (props) {
     const [title, setTitle] = useState ("מצוקת מים");

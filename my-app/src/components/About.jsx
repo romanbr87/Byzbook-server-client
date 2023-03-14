@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import { isBrowser } from "react-device-detect";
-import Menu from "../Panels/Menu";
 
 import BusinessCard from "../Panels/BusinessCard";
-import { fetchData } from "../ContextAPI";
+import { fetchData } from "../api";
 import "../styles/style.css";
 
 export default function About(props) {
@@ -36,8 +35,7 @@ export default function About(props) {
 
         <title>אודות</title>
         </Helmet>
-        <Menu user={props.user}/>
-        
+       
         <div className={isBrowser ? "container" : "container-fluid"} style={{paddingBottom: "15em"}}>       
         <div className="row typeEditor">        
 

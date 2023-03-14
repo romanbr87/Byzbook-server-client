@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { getPost } from '../../ContextAPI'
+import { getPost } from '../../api'
 
 export const fetchPanelData = createAsyncThunk('panelData/fetchData', async () => {
     const response = await getPost ('/cnt');

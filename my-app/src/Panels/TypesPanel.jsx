@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {Helmet} from "react-helmet";
 import TypesInputPanel from "../Element/TypesInputPanel";
 import "../styles/style.css";
-import { fetchData } from "../ContextAPI";
+import { fetchData } from "../api";
 
 export default function TypesPanel (props) {
     const [err, setErr] = useState(null)
@@ -107,6 +107,8 @@ export default function TypesPanel (props) {
     }
 
     useEffect(() => {
+        console.log (props);
+        
         if (props.err) {
             setErr (props.err);
         }

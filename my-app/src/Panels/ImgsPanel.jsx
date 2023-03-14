@@ -15,7 +15,7 @@ export default function ImgsPanel (props) {
             setDidMount(true);   
         }
 		
-    }, [props])
+    }, [])
   
 	if (!didMount) return <div></div>
 	return (

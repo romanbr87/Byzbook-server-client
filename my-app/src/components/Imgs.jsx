@@ -1,14 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Helmet } from "react-helmet";
-import Menu from "../Panels/Menu";
 import ImgsPanel from "../Panels/ImgsPanel";
 import "../styles/style.css";
 
 export default function Imgs (props) {
-    
-	useEffect(() => {    
-		console.log (props);
-    }, [props])
 
     return (
 	<React.Fragment>
@@ -35,7 +30,7 @@ export default function Imgs (props) {
         <p></p>
     </div>
 
-    <ImgsPanel {...props} /> 
+    <ImgsPanel {...props} />    
 
     </div>	
     </React.Fragment>

@@ -4,10 +4,11 @@ import { createBrowserHistory } from "history";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { fetchData } from './ContextAPI';
+import { fetchData } from './api';
 
 import HomePage from './components/HomePage';
 import About from './components/About'
+import AdminPage from "./components/AdminPage"
 import TypesEditor from './components/TypesEditor'
 import Reports from "./components/Reports";
 import Contactmessages from "./components/Contactmessages";
@@ -22,10 +23,12 @@ import Menu from "./Panels/Menu";
 import 'react-notifications/lib/notifications.css';
 import { fetchUser } from './store/slices/user-slice';
 import { fetchPanelData } from './store/slices/panelData-slice';
+import { useOnline } from './hooks/useOnline';
 
 export default function App() {
   const user = useSelector (state => state.user)
   const panelData = useSelector (state => state.panelData);  
+  const isOnline = useOnline ();
   const dispatch = useDispatch ()
 
   
@@ -33,21 +36,22 @@ export default function App() {
   //const [panelData, setPanelData] = useState ()
   const history = createBrowserHistory();   
 
+    console.log (`isOnline: ${isOnline}`);
     useEffect(() => {
       dispatch(fetchUser());
       dispatch (fetchPanelData());
   
       console.clear ();
-
-      const notify = (type) => {
-        type === 'online' ? 
+    
+      /*const notify = (type) => {
+        isOnline  ? 
         NotificationManager.success('Success', 'you are online')
         :
         NotificationManager.error('Error', 'you are offline')
-      }
+      }*/
 
-      window.addEventListener('offline', (e) => { notify ('offline') });
-      window.addEventListener('online', (e) => { notify ('online') });
+      /*window.addEventListener('offline', (e) => { notify ('offline') });
+      window.addEventListener('online', (e) => { notify ('online') });*/
 
       console.log ("URL: "); 
       console.log (history.location)
@@ -64,7 +68,7 @@ export default function App() {
       
       console.log ("panelData:")
       console.log (panelData);*/
-    }, [])
+    }, [dispatch, history, isOnline])
     
     if (!data) return (<p>12</p>)
     return (
@@ -76,6 +80,7 @@ export default function App() {
           <Switch>
             <Route exact path='/' render={() => <HomePage {...data} />} />
             <Route path='/about' render={() => <About {...data} />} />
+            <Route path='/administrator' render={({ match }) => <AdminPage cnt={panelData}/>  } />
             <Route path='/typeseditor' render={({ match }) => <TypesEditor {...data } />  } />
             <Route path='/reports' render={({ match }) => <Reports {...data } />  } />
             <Route path='/contactmessages' render={({ match }) => <Contactmessages {...data } />  } />

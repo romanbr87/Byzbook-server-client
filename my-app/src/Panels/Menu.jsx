@@ -1,6 +1,4 @@
 import React, { useMemo } from "react";
-import { useEffect } from "react";
-import { ReactDOM } from "react";
 import "../styles/style.css";
 
 export default function Menu(props) {
@@ -24,13 +22,6 @@ export default function Menu(props) {
 
     }*/
 
-    useEffect (() => {
-        console.log ("User:")
-        console.log (user);
-        
-        console.log ("panelData:")
-        console.log (panelData);  
-    })
     return ( 
         <>
         <nav className="navbar navbar-inverse navbar-fixed-top">

@@ -47,8 +47,8 @@ export const getCities = (setCities) => {
         });
 }
 
-export const fetchData =  async (url, method='POST', dataForServer = null) => {
-    const urls = ['/contact']
+export const fetchData =  async (url, method='POST', dataForServer = undefined) => {
+    const urls = ['/contact', '/administrator']
     if (urls.some(currUrl => currUrl.toLowerCase() === url.toLowerCase())) {
         return Promise.resolve(true);
     }
@@ -73,22 +73,22 @@ export const fetchData =  async (url, method='POST', dataForServer = null) => {
         throw Error(`${err}`);
     }*/
 
-    let requestOptions = {
+    const requestOptions = {
         method: method,
         headers: {'Content-Type': 'application/json'},
-    }
-    
-    if (dataForServer !== null) requestOptions.data = dataForServer;
+        ...(dataForServer !== undefined && {data: dataForServer})
 
+    }
 
     try {
-        let  {data} = await (await axios(`http://localhost:8080${url}`, requestOptions))
+        const  {data} = await axios(`http://localhost:8080${url}`, requestOptions)
         console.log (data);
         return data;
     } 
     
     catch (error) {
         console.log (error.response);
+        console.log (`url: ${url}`)
         const customError = new Error(error.response.data.message)
         throw customError;
     }

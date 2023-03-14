@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { isBrowser } from 'react-device-detect';
 import SiteBtnPanel from '../Element/SiteBtnPanel';
 
-import {Consumer} from '../ContextAPI'
+import {Consumer} from '../api'
 
 import '../styles/App.css';
 import '../styles/style.css';

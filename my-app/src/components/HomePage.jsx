@@ -5,7 +5,7 @@ import List1 from './List1';
 import List2 from './List2';
 import ReportModal from './ReportModal';
 
-import {Provider, getCities, fetchData  } from '../ContextAPI'
+import {Provider, getCities, fetchData  } from '../api'
 import "../styles/style.css";
 
 export default function HomePage(props) {

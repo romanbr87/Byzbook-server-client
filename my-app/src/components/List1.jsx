@@ -1,7 +1,7 @@
 import React from 'react';
 //import Item2 from "./Searchitem"
 import BusinessCard from "../Panels/BusinessCard"
-import { divideArray } from "../ContextAPI";
+import { divideArray } from "../api";
 import "../styles/style.css";
 
 export default function List1(props) {
